@@ -139,13 +139,13 @@ class S2PixelCloudDetector:
 
         if self.average_over:
             cloud_masks = np.asarray([convolve(cloud_prob, self.conv_filter) > threshold
-                                      for cloud_prob in cloud_probs], dtype=np.int8)
+                                      for cloud_prob in cloud_probs], dtype=np.uint8)
         else:
-            cloud_masks = (cloud_probs > threshold).astype(np.int8)
+            cloud_masks = (cloud_probs > threshold).astype(np.uint8)
 
         if self.dilation_size:
             cloud_masks = np.asarray([dilation(cloud_mask, self.dilation_filter) for cloud_mask in cloud_masks],
-                                     dtype=np.int8)
+                                     dtype=np.uint8)
 
         return cloud_masks
 
